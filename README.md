@@ -1,139 +1,149 @@
-# Loan-Default-Prediction-
+# Loan Default Prediction and Analysis
 
-This repository provides a comprehensive analysis of loan default prediction using machine learning techniques. The dataset contains information about loan applicants, including financial and demographic features. The goal is to predict whether a loan applicant will default on their loan.
+## Project Overview
 
-Dataset
+This project focuses on predicting loan default based on various customer features. By analyzing a variety of attributes, including demographic information, financial history, and loan-related details, we aim to develop a model that can accurately predict whether a loan applicant will default on their loan.
 
-The dataset consists of the following features:
+The project incorporates advanced data visualization techniques, statistical analysis, feature engineering, and model evaluation using machine learning algorithms. It also includes anomaly detection, data preprocessing, and model interpretability methods.
 
-1. LoanID: Unique identifier for the loan applicant.
+---
 
+## Table of Contents
 
-2. Age: Age of the loan applicant (numerical).
+1. [Introduction](#introduction)
+2. [Data Analysis](#data-analysis)
+3. [Data Visualization](#data-visualization)
+4. [Feature Engineering](#feature-engineering)
+5. [Statistical Testing](#statistical-testing)
+6. [Model Development](#model-development)
+7. [Model Evaluation](#model-evaluation)
+8. [Anomaly Detection](#anomaly-detection)
+9. [Conclusion](#conclusion)
 
+---
 
-3. Income: Annual income of the applicant (numerical).
+## 1. Introduction
 
+The goal of this project is to understand the factors influencing loan defaults and develop a predictive model that can be used to forecast loan defaults in the future. The dataset contains various features like **Age**, **Income**, **CreditScore**, and **LoanAmount**, among others. These features will be analyzed to understand the relationship with the target variable, **Default**, which indicates whether a borrower has defaulted on their loan (1 for default, 0 for no default).
 
-4. LoanAmount: Amount of the loan applied for (numerical).
+---
 
+## 2. Data Analysis
 
-5. CreditScore: Applicant's credit score (numerical).
+### Data Cleaning and Preprocessing
 
+1. **Handling Missing Data**: 
+   - Missing values are either imputed using appropriate techniques or dropped if necessary.
+   
+2. **Encoding Categorical Variables**:
+   - Categorical features such as **Education**, **EmploymentType**, and **LoanPurpose** are transformed using **Label Encoding** to convert them into numerical representations for model training.
 
-6. MonthsEmployed: Number of months the applicant has been employed (numerical).
+3. **Outlier Detection**:
+   - Outliers in continuous variables are detected and handled to prevent them from skewing the results.
 
+4. **Data Normalization**:
+   - Continuous variables are scaled appropriately to bring all features onto a similar range.
 
-7. NumCreditLines: Number of credit lines the applicant has (numerical).
+---
 
+## 3. Data Visualization
 
-8. InterestRate: Interest rate of the loan (numerical).
+### Key Visualizations
 
+1. **Loan Purpose Distribution by Age Group**:
+   - An **area plot** is used to visualize the distribution of loan purposes across different age groups, providing insight into how loan purposes vary across demographics.
 
-9. LoanTerm: Term duration of the loan (numerical).
+2. **Credit Score Distribution for Defaulted vs Non-defaulted Customers**:
+   - A **violin plot** is used to compare the **Credit Score** distribution for defaulted and non-defaulted customers. This helps in understanding if there’s a significant difference in the credit scores of defaulters and non-defaulters.
 
+3. **Density Plot Between Age and Income**:
+   - A **2D density plot** helps visualize the relationship between **Age** and **Income**, highlighting regions with higher concentrations of data points.
 
-10. DTIRatio: Debt-to-income ratio of the applicant (numerical).
+4. **Correlation Heatmap**:
+   - A **heatmap** of the correlation matrix is used to understand the relationships between numerical features in the dataset. This is helpful in identifying highly correlated features that can be used in model building.
 
+5. **Partial Dependence Plots (PDP)**:
+   - PDPs are used to analyze the impact of specific features (e.g., **Income**, **Interest Rate**) on the predicted probability of default. These plots provide valuable insights into how changes in feature values affect the target variable.
 
-11. Education: Education level of the applicant (categorical).
+---
 
+## 4. Feature Engineering
 
-12. EmploymentType: Employment status (categorical).
+1. **Binning**:
+   - Numerical features such as **Age**, **Income**, and **LoanAmount** are binned into categories to facilitate better visualization and analysis.
 
+2. **Interaction Features**:
+   - Interaction terms between features are created to capture relationships that may not be evident when looking at individual features in isolation.
 
-13. MaritalStatus: Marital status of the applicant (categorical).
+3. **Feature Importance**:
+   - **Random Forest** model is used to rank the importance of features in predicting loan defaults. This helps in selecting the most relevant features for the predictive model.
 
+---
 
-14. HasMortgage: Whether the applicant has a mortgage (categorical).
+## 5. Statistical Testing
 
+### Chi-Square Test
 
-15. HasDependents: Whether the applicant has dependents (categorical).
+To assess the relationship between categorical features and the target variable (**Default**), the **Chi-Square Test of Independence** is used. Features with a **p-value** less than 0.05 are considered statistically significant and potentially valuable predictors.
 
+### Variance Inflation Factor (VIF)
 
-16. LoanPurpose: Purpose of the loan (categorical).
+To detect multicollinearity between features, **Variance Inflation Factor (VIF)** is calculated. Features with high VIF values (greater than 5) are removed or transformed to ensure the stability of the predictive model.
 
+---
 
-17. HasCoSigner: Whether the applicant has a co-signer for the loan (categorical).
+## 6. Model Development
 
+Several machine learning models are explored to predict loan defaults:
 
-18. Default: Target variable (binary). Indicates whether the applicant defaults on the loan (1) or not (0).
+1. **Logistic Regression**:
+   - A baseline **Logistic Regression** model is trained and evaluated using cross-validation.
 
+2. **Random Forest Classifier**:
+   - A more complex **Random Forest Classifier** is trained to capture non-linear relationships between the features and the target variable. Feature importance is also evaluated using this model.
 
+3. **Support Vector Machines (SVM)**:
+   - SVMs are tested for their ability to classify customers as default or non-default based on the provided features.
 
-Data Preprocessing
+4. **Isolation Forest**:
+   - **Isolation Forest** is used for anomaly detection to identify unusual patterns that might indicate fraudulent activity or data quality issues.
 
-The dataset has been preprocessed, including:
+---
 
-Binning of Numerical Features: For better visualization and understanding of distributions, numerical features like Age, Income, LoanAmount, CreditScore, etc., have been binned into intervals.
+## 7. Model Evaluation
 
-Categorical Encoding: Categorical features like Education, EmploymentType, etc., are encoded using LabelEncoder for machine learning compatibility.
+1. **Classification Report**:
+   - The **classification report** provides key metrics such as precision, recall, and F1-score, which help in evaluating the model's performance, especially in imbalanced datasets.
 
-Feature Selection: Random Forest and other statistical methods (like Chi-Square test) have been used to identify the most important features affecting loan default prediction.
+2. **Confusion Matrix**:
+   - The **confusion matrix** visualizes the performance of the model, helping to understand the number of false positives, false negatives, true positives, and true negatives.
 
+3. **ROC-AUC Score**:
+   - The **ROC-AUC score** is calculated to assess the model's ability to discriminate between default and non-default customers.
 
-Key Insights
+---
 
-Visualizations
+## 8. Anomaly Detection
 
-Various visualizations have been created to understand the distribution of features and their relationships with the target variable (Default):
+The **Isolation Forest** algorithm is used to detect anomalies in the dataset. Anomalies are identified and classified, and a **confusion matrix** and **classification report** are generated to assess the performance of the anomaly detection process.
 
-Loan Amount vs Default: As loan amount increases, the count of defaults increases.
+---
 
-Credit Score vs Default: Higher credit scores are associated with fewer defaults.
+## 9. Conclusion
 
-Interest Rate vs Default: As interest rate increases, the probability of default also increases.
+This project demonstrates the process of analyzing loan default data and building predictive models. The following key insights were gained:
 
-Employment Type vs Default: Unemployed individuals tend to have higher default rates.
+1. **Significant Predictors**: Features such as **Credit Score**, **Income**, and **DTI Ratio** are strong predictors of loan default.
+2. **Data Imbalance**: The dataset exhibits a class imbalance, which was addressed using **SMOTE** to resample the minority class (default).
+3. **Model Performance**: The **Random Forest** model performed well in predicting loan defaults, with significant feature importance contributing to the accuracy of the model.
 
+---
 
-Statistical Tests
+## Future Work
 
-Chi-Square Test: Categorical features like EmploymentType, Education, LoanPurpose, etc., were tested for significance in relation to the target variable (Default). Features such as Education, EmploymentType, MaritalStatus, and others showed significant associations with Default.
+- Further fine-tuning of machine learning models using hyperparameter optimization techniques.
+- Exploration of other algorithms such as **XGBoost** and **LightGBM** for better performance.
+- Implementation of time series analysis if loan data includes temporal information.
 
+---
 
-Feature Importance
-
-Random Forest: A Random Forest model was used to determine feature importance. The top 5 features influencing loan default prediction are:
-
-Income
-
-Interest Rate
-
-Loan Amount
-
-Credit Score
-
-Age
-
-
-
-Partial Dependence Plots (PDP)
-
-Income vs Default Probability: A decreasing trend was observed, where higher income correlates with a lower probability of default.
-
-Interest Rate vs Default Probability: Higher interest rates were associated with a higher probability of default.
-
-
-Anomaly Detection
-
-Isolation Forest: An anomaly detection technique was applied to identify unusual loan applications. The model identified several anomalies, although many were false positives (non-default cases flagged as anomalies).
-
-
-Resampling Techniques
-
-SMOTE (Synthetic Minority Over-sampling Technique): SMOTE was applied to address class imbalance in the dataset. After resampling, the number of default cases increased to balance the data.
-
-
-Model Evaluation
-
-Logistic Regression: After resampling, the Logistic Regression model achieved a satisfactory ROC-AUC score. A classification report was generated, highlighting precision, recall, and F1-score for predicting loan default.
-
-Random Forest: With hyperparameter tuning (pruning), the Random Forest model showed good performance in predicting loan defaults after SMOTE resampling.
-
-
-Conclusion
-
-This analysis has provided valuable insights into loan default prediction. 
-
---
